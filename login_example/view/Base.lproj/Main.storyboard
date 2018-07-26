@@ -25,7 +25,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="59" height="61"/>
                                         <state key="normal" image="3"/>
                                         <connections>
-                                            <action selector="linkedInlogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tIx-SR-0lV"/>
+                                            <action selector="linkedinBtnTaped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9ZD-An-Dtd"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJV-Fk-fb2">

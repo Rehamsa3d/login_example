@@ -1,8 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-    
 <dict>
+    <key>LIAppId</key>
+    <string>86lumo1mbw18oj</string>
+        
+        <key>CFBundleURLTypes</key>
+        <array>
+            <dict>
+                <key>CFBundleURLSchemes</key>
+                <array>
+                    <string>li86lumo1mbw18oj</string>
+                    </array>
+                </dict>
+            </array>
+            <key>LSApplicationQueriesSchemes</key>
+            <array>
+                <string>linkedin</string>
+                <string>linkedin-sdk2</string>
+                <string>linkedin-sdk</string>
+            </array>
+            <key>NSAppTransportSecurity</key>
+            <dict>
+                <key>NSExceptionDomains</key>
+                <dict>
+                    <key>linkedin.com</key>
+                    <dict>
+                        <key>NSExceptionAllowsInsecureHTTPLoads</key>
+                        <true/>
+                        <key>NSIncludesSubdomains</key>
+                        <true/>
+                        <key>NSExceptionRequiresForwardSecrecy</key>
+                        <false/>
+                    </dict>
+                </dict>
+            </dict>
+            
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -85,5 +118,4 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 </dict>
-
 </plist>
