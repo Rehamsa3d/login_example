@@ -28,25 +28,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // [START openurl]
     func application(_ application: UIApplication,
                      open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-//        // Linkedin sdk handle redirect
-//        if LinkedinSwiftHelper.shouldHandle(url) {
-//            return LinkedinSwiftHelper.application(application, open: url, sourceApplication: nil, annotation: nil)
-//        }else{
-//        return GIDSignIn.sharedInstance().handle(url,sourceApplication: sourceApplication,annotation: annotation)
-//        }
         // Linkedin sdk handle redirect
-        
-        print(x as Any)
         if LinkedinSwiftHelper.shouldHandle(url) {
-            return LinkedinSwiftHelper.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+            return LinkedinSwiftHelper.application(application, open: url, sourceApplication: nil, annotation: nil)
+        }else{
+        return GIDSignIn.sharedInstance().handle(url,sourceApplication: sourceApplication,annotation: annotation)
         }
-       
-        else if x == 2 {
-            return GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: annotation)
-        }
+ 
+//
         
-        
-        return false
     }
     // [END openurl]
     @available(iOS 9.0, *)

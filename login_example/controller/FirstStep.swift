@@ -10,9 +10,6 @@ import UIKit
 import GoogleSignIn
 import LinkedinSwift
 
-var x: Int?
-
-
 class FirstStep: UIViewController {
     
     
@@ -28,7 +25,6 @@ class FirstStep: UIViewController {
     
 
     @IBAction func googleBtnTaped(_ sender: Any) {
-        x = 2
         GIDSignIn.sharedInstance().signIn()
 
     }
