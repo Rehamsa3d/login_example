@@ -30,11 +30,15 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJV-Fk-fb2">
                                         <rect key="frame" x="79" y="0.0" width="59" height="61"/>
+                                        <state key="normal" image="4"/>
+                                        <connections>
+                                            <action selector="googleBtnTaped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kHh-pR-Lvr"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login with " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXB-wz-eYz">
-                                <rect key="frame" x="118" y="236" width="139" height="36"/>
+                                <rect key="frame" x="118" y="235.5" width="139" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="textColor" red="1" green="0.25270927790710007" blue="0.041568728897784624" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -50,18 +54,17 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="signInButton" destination="hJV-Fk-fb2" id="wJO-2q-uw3"/>
-                        <segue destination="JH7-ph-5hI" kind="presentation" identifier="GoogleVC" id="NhE-LE-cSE"/>
+                        <segue destination="JH7-ph-5hI" kind="presentation" identifier="DetailsVC" id="NhE-LE-cSE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="290" y="43"/>
         </scene>
-        <!--GoogleVC-->
+        <!--DetailsVC-->
         <scene sceneID="oSk-AG-7la">
             <objects>
-                <viewController storyboardIdentifier="GoogleVC" id="JH7-ph-5hI" customClass="GoogleVC" customModule="login_example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailsVC" id="JH7-ph-5hI" customClass="DetailsVC" customModule="login_example" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6iW-Jn-mvg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -104,5 +107,6 @@
     </scenes>
     <resources>
         <image name="3" width="59" height="61"/>
+        <image name="4" width="53" height="55"/>
     </resources>
 </document>

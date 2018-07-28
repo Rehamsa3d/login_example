@@ -9,63 +9,42 @@
 import UIKit
 import GoogleSignIn
 import LinkedinSwift
+
+var x: Int?
+
+
 class FirstStep: UIViewController {
     
-    @IBOutlet weak var signInButton: GIDSignInButton!
     
+    /*************LinkedIN*************/
+    let linkedinHelper = LinkedinSwiftHelper(configuration: LinkedinSwiftConfiguration(clientId: "86lumo1mbw18oj", clientSecret: "iqkDGYpWdhf7WKzA", state: "linkedin\(Int(Date().timeIntervalSince1970))", permissions: ["r_basicprofile", "r_emailaddress"], redirectUrl: "http://localhost:8080/login_example/auth/linkedin"))
+
     
     //viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        googleSignIn()
+        googleDelegates()
+    }
+    
+
+    @IBAction func googleBtnTaped(_ sender: Any) {
+        x = 2
+        GIDSignIn.sharedInstance().signIn()
+
     }
     
     @IBAction func linkedinBtnTaped(_ sender: Any) {
         linkedinSI()
     }
     
-    //google SignIn
-    func googleSignIn() {
+    //google googleDelegates
+    func googleDelegates() {
         //adding the delegates
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
-        
-        //getting the signin button and adding it to view
-        let googleSignInButton = GIDSignInButton()
-        googleSignInButton.style = .iconOnly
-        googleSignInButton.colorScheme = .light
-        signInButton.addSubview(googleSignInButton)
-        
     }
     
-    //linkedin signin func
-    func linkedinSI()  {
-        // You still need to set appId and URLScheme in Info.plist, follow this instruction: https://developer.linkedin.com/docs/ios-sdk
-        let linkedinHelper = LinkedinSwiftHelper(configuration: LinkedinSwiftConfiguration(clientId: "86lumo1mbw18oj", clientSecret: "iqkDGYpWdhf7WKzA", state: "DLKDJF46ikMMZADfdfds", permissions: ["r_basicprofile", "r_emailaddress"], redirectUrl: "https://github.com"))
-        linkedinHelper.authorizeSuccess({ (token) in
-            
-            print(token)
-            //This token is useful for fetching profile info from LinkedIn server
-        }, error: { (error) in
-            
-            print(error.localizedDescription)
-            //show respective error
-        }) {
-            //show sign in cancelled event
-        }
-        
-        //requestURL
-        linkedinHelper.requestURL("https://api.linkedin.com/v1/people/~:(id,first-name,last-name,email-address,picture-url,picture-urls::(original),positions,date-of-birth,phone-numbers,location)?format=json", requestType: LinkedinSwiftRequestGet, success: { (response) -> Void in
-            
-            print(response)
-            //parse this response which is in the JSON format
-        }) {(error) -> Void in
-            
-            print(error.localizedDescription)
-            //handle the error
-        }
-        
-    }
+
 }
 
 //GIDSignInUIDelegate      //google SignIn
@@ -88,10 +67,54 @@ extension FirstStep:GIDSignInUIDelegate, GIDSignInDelegate {
             
             let userINFO = "\(String(describing: userId!))\r\n\(String(describing: fullName!))\r\n\r\n\(String(describing: givenName!))\r\n\(String(describing: familyName!))\r\n\(String(describing: email!))"
             
-            performSegue(withIdentifier: "GoogleVC", sender: userINFO)
+            performSegue(withIdentifier: "DetailsVC", sender: userINFO)
             
         }
         
+        
+    }
+}
+
+
+//linkedin signin extension
+
+extension FirstStep{
+    //linkedin signin func
+    func linkedinSI()  {
+        
+        linkedinHelper.authorizeSuccess({(lsToken) -> Void in
+            
+            print("Login success lsToken: \(lsToken)")
+            
+            
+            self.linkedinHelper.requestURL("https://api.linkedin.com/v1/people/~:(id,first-name,last-name,email-address,picture-url,picture-urls::(original),positions,date-of-birth,phone-numbers,location)?format=json", requestType: LinkedinSwiftRequestGet, success: { (response) -> Void in
+                
+                print("Request success with response: \(response)")
+                
+                // Perform any operations on signed in user here.
+                let user = response.jsonObject
+                
+                // let idToken = user.authentication.idToken // Safe to send to the server
+                let name = "\(user?["firstName"] as AnyObject) \(user?["lastName"] as AnyObject)"
+                let email = "\(user?["emailAddress"] as AnyObject)"
+                
+                let userINFO = "\(String(describing: name))\r\n\r\n\(String(describing: email))"
+                
+                self.performSegue(withIdentifier: "DetailsVC", sender: userINFO)
+                
+            })
+            {(error) -> Void in
+                
+                print("Encounter error: \(error.localizedDescription)")
+            }
+            
+        }, error: {(error) -> Void in
+            
+            print("Encounter error: \(error.localizedDescription)")
+        }, cancel: {() -> Void in
+            
+            print("User Cancelled")
+        })
         
     }
 }
@@ -100,10 +123,28 @@ extension FirstStep:GIDSignInUIDelegate, GIDSignInDelegate {
 extension FirstStep {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "GoogleVC" {
-            if let vc = segue.destination as? GoogleVC {
+        if segue.identifier == "DetailsVC" {
+            if let vc = segue.destination as? DetailsVC {
                 vc.type = sender as? String
             }
         }
     }
 }
+
+
+extension UIImageView {
+    public func imageFromServerURL(urlString: String) {
+        
+        URLSession.shared.dataTask(with: NSURL(string: urlString)! as URL, completionHandler: { (data, response, error) -> Void in
+            
+            if error != nil {
+                print(error as Any)
+                return
+            }
+            DispatchQueue.main.async(execute: { () -> Void in
+                let image = UIImage(data: data!)
+                self.image = image
+            })
+            
+        }).resume()
+    }}

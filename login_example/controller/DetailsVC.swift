@@ -11,7 +11,7 @@
 import UIKit
 import GoogleSignIn
 
-class GoogleVC: UIViewController {
+class DetailsVC: UIViewController {
 
     var type: String?
 

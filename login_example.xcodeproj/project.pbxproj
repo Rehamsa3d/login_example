@@ -15,7 +15,7 @@
 		80A7C1322109FA9F00E9A168 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80A7C1302109FA9F00E9A168 /* LaunchScreen.storyboard */; };
 		80A7C1A2210A05FA00E9A168 /* linkedin-sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80A7C161210A05FA00E9A168 /* linkedin-sdk.framework */; };
 		80A7C1A3210A05FA00E9A168 /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = 80A7C162210A05FA00E9A168 /* license.txt */; };
-		80A7C1B7210A0E3A00E9A168 /* GoogleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A7C1B6210A0E3A00E9A168 /* GoogleVC.swift */; };
+		80A7C1B7210A0E3A00E9A168 /* DetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A7C1B6210A0E3A00E9A168 /* DetailsVC.swift */; };
 		80A7C1BF210A347E00E9A168 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 80A7C1BE210A347E00E9A168 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -32,7 +32,7 @@
 		80A7C1332109FA9F00E9A168 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		80A7C161210A05FA00E9A168 /* linkedin-sdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "linkedin-sdk.framework"; sourceTree = "<group>"; };
 		80A7C162210A05FA00E9A168 /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
-		80A7C1B6210A0E3A00E9A168 /* GoogleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleVC.swift; sourceTree = "<group>"; };
+		80A7C1B6210A0E3A00E9A168 /* DetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsVC.swift; sourceTree = "<group>"; };
 		80A7C1BE210A347E00E9A168 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,7 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				80A7C1292109FA9E00E9A168 /* FirstStep.swift */,
-				80A7C1B6210A0E3A00E9A168 /* GoogleVC.swift */,
+				80A7C1B6210A0E3A00E9A168 /* DetailsVC.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -272,7 +272,7 @@
 			files = (
 				80A7C12A2109FA9E00E9A168 /* FirstStep.swift in Sources */,
 				80A7C1282109FA9E00E9A168 /* AppDelegate.swift in Sources */,
-				80A7C1B7210A0E3A00E9A168 /* GoogleVC.swift in Sources */,
+				80A7C1B7210A0E3A00E9A168 /* DetailsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
