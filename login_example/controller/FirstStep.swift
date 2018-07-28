@@ -15,10 +15,7 @@ class FirstStep: UIViewController {
     
     /*************Self Created Var*************/
 //    let loginManager = FBSDKLoginManager()
-    var fbData = [String: AnyObject]()
-    var twiData = [String: AnyObject]()
     var lnData = [String: AnyObject]()
-    var gData = [String: AnyObject]()
     var image: String?
     var name: String?
     var email: String?
