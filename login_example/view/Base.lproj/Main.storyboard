@@ -54,17 +54,17 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <segue destination="JH7-ph-5hI" kind="presentation" identifier="DetailsVC" id="NhE-LE-cSE"/>
+                        <segue destination="JH7-ph-5hI" kind="presentation" identifier="DetailVC" id="NhE-LE-cSE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="290" y="43"/>
         </scene>
-        <!--DetailsVC-->
+        <!--DetailVC-->
         <scene sceneID="oSk-AG-7la">
             <objects>
-                <viewController storyboardIdentifier="DetailsVC" id="JH7-ph-5hI" customClass="DetailsVC" customModule="login_example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailsVC" id="JH7-ph-5hI" customClass="DetailVC" customModule="login_example" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6iW-Jn-mvg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

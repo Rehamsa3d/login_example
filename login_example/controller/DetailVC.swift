@@ -11,7 +11,7 @@
 import UIKit
 import GoogleSignIn
 
-class DetailsVC: UIViewController {
+class DetailVC: UIViewController {
 
     var type: String?
 
@@ -24,6 +24,7 @@ class DetailsVC: UIViewController {
     
     @IBAction func didTapSignOut(_ sender: AnyObject) {
        signOut()
+
     }
 
     //signOut

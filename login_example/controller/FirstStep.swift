@@ -13,9 +13,18 @@ import LinkedinSwift
 class FirstStep: UIViewController {
     
     
+    /*************Self Created Var*************/
+//    let loginManager = FBSDKLoginManager()
+    var fbData = [String: AnyObject]()
+    var twiData = [String: AnyObject]()
+    var lnData = [String: AnyObject]()
+    var gData = [String: AnyObject]()
+    var image: String?
+    var name: String?
+    var email: String?
+    
     /*************LinkedIN*************/
-    let linkedinHelper = LinkedinSwiftHelper(configuration: LinkedinSwiftConfiguration(clientId: "86lumo1mbw18oj", clientSecret: "iqkDGYpWdhf7WKzA", state: "linkedin\(Int(Date().timeIntervalSince1970))", permissions: ["r_basicprofile", "r_emailaddress"], redirectUrl: "http://localhost:8080/login_example/auth/linkedin"))
-
+    
     
     //viewDidLoad
     override func viewDidLoad() {
@@ -30,7 +39,10 @@ class FirstStep: UIViewController {
     }
     
     @IBAction func linkedinBtnTaped(_ sender: Any) {
+        GIDSignIn.sharedInstance().signOut()
+
         linkedinSI()
+       
     }
     
     //google googleDelegates
@@ -63,7 +75,7 @@ extension FirstStep:GIDSignInUIDelegate, GIDSignInDelegate {
             
             let userINFO = "\(String(describing: userId!))\r\n\(String(describing: fullName!))\r\n\r\n\(String(describing: givenName!))\r\n\(String(describing: familyName!))\r\n\(String(describing: email!))"
             
-            performSegue(withIdentifier: "DetailsVC", sender: userINFO)
+            performSegue(withIdentifier: "DetailVC", sender: userINFO)
             
         }
         
@@ -77,29 +89,27 @@ extension FirstStep:GIDSignInUIDelegate, GIDSignInDelegate {
 extension FirstStep{
     //linkedin signin func
     func linkedinSI()  {
-        
+        let linkedinHelper = LinkedinSwiftHelper(configuration: LinkedinSwiftConfiguration(clientId: "86lumo1mbw18oj", clientSecret: "cs9xt7Wr2SwqUJGh", state: "linkedin\(Int(Date().timeIntervalSince1970))", permissions: ["r_basicprofile", "r_emailaddress"], redirectUrl: "https://devlives.com"))
+
         linkedinHelper.authorizeSuccess({(lsToken) -> Void in
             
             print("Login success lsToken: \(lsToken)")
             
-            
-            self.linkedinHelper.requestURL("https://api.linkedin.com/v1/people/~:(id,first-name,last-name,email-address,picture-url,picture-urls::(original),positions,date-of-birth,phone-numbers,location)?format=json", requestType: LinkedinSwiftRequestGet, success: { (response) -> Void in
+            linkedinHelper.requestURL("https://api.linkedin.com/v1/people/~:(id,first-name,last-name,email-address,picture-url,picture-urls::(original),positions,date-of-birth,phone-numbers,location)?format=json", requestType: LinkedinSwiftRequestGet, success: { (response) -> Void in
                 
                 print("Request success with response: \(response)")
+                let a = response.jsonObject
+                //                    jsonObject: [AnyHashable : Any]
+                //                    let data = response["LSResponse - data"]
                 
-                // Perform any operations on signed in user here.
-                let user = response.jsonObject
+                self.lnData.updateValue(a?["emailAddress"] as AnyObject, forKey: "email")
+                let name = "\(a?["firstName"] as AnyObject) \(a?["lastName"] as AnyObject)"
+                self.lnData.updateValue(name as AnyObject, forKey: "name")
+                self.lnData.updateValue(a?["pictureUrl"] as AnyObject, forKey: "image")
+                print(self.lnData)
+                self.performSegue(withIdentifier: "DetailVC", sender: name)
                 
-                // let idToken = user.authentication.idToken // Safe to send to the server
-                let name = "\(user?["firstName"] as AnyObject) \(user?["lastName"] as AnyObject)"
-                let email = "\(user?["emailAddress"] as AnyObject)"
-                
-                let userINFO = "\(String(describing: name))\r\n\r\n\(String(describing: email))"
-                
-                self.performSegue(withIdentifier: "DetailsVC", sender: userINFO)
-                
-            })
-            {(error) -> Void in
+            }) {(error) -> Void in
                 
                 print("Encounter error: \(error.localizedDescription)")
             }
@@ -119,8 +129,8 @@ extension FirstStep{
 extension FirstStep {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "DetailsVC" {
-            if let vc = segue.destination as? DetailsVC {
+        if segue.identifier == "DetailVC" {
+            if let vc = segue.destination as? DetailVC {
                 vc.type = sender as? String
             }
         }
